@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-yi+4(v2)52&a_5%#xmk+e-u=7!#&kkll%_t)$06yto%*f)w5md
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -33,14 +33,13 @@ ALLOWED_HOSTS = []
 #so that django knows that you have created certain app
 # we need to provide the path of the apps.py that have the config function
 INSTALLED_APPS = [
-    'url_shortener.apps.UrlShortenerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+  'url_shortener.apps.UrlShortenerConfig',
 ]
 
 MIDDLEWARE = [
@@ -120,8 +119,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+# STATICFILES_DIRS = [BASE_DIR/'static']
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+
+MEDIA_URL = "img/"
+MEDIA_ROOT = BASE_DIR/'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
