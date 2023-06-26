@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+   
+</head>
+<body>
+    <div class="container" style="height: 80vh;" >
+        <!-- <img src="images/logo.png" alt="logo" id="logo"> -->
+        <div>
+            <form method="post" id="form_input">
+            <!-- the below token is used so that the django can handle and secure session -->
+            <!-- for every session an unique token is generated -->
+            {% csrf_token %}
+            <h2>Login</h2>
+            <div class="screen"></div>
+            <input type="text" name="username" placeholder="Username" class="read"><br>
+            <input type="password" name="password" placeholder="Password" class="read"><br>
+            <input type="checkbox" name="remember">&ensp;<label>Remember me</label><br>
+            <input type="submit" value="Sign in" name="login">
+        </form>
+        </div>
+</div>
+        {% if invalid %}
+        <div class="container " id="invalid"  style="height: 20vh; display:block " onload="remove()">
+            <div class="row py-4">
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <div class="alert alert-success">
+                        <strong>Invalid Password</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %} 
+     
+        <script type="text/javascript">
+            document.querySelector('#invalid').addEventListener('load', function(){
+            remove();
+                });
+            function remove(){
+            const update=document.getElementById("invalid")
+			update.style.display = "block"
+			setTimeout(() => {
+				update.style.display = "none"
+			}, 1500);
+			;
+        }
+        </script>
+
+</body>
+</html>
